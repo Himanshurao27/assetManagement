@@ -1,0 +1,23 @@
+{
+    "name": "cloudstuffinc/api-utils",
+    "description": "Api Utilities for Cloudstuff projects",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Hemant Mann",
+            "email": "hemant.mann@cloudstuff.tech"
+        }
+    ],
+    "require": {
+        "guzzlehttp/psr7": "^1.4",
+        "guzzlehttp/guzzle": "^6.2",
+        "google/cloud-pubsub": "^1.29",
+        "google/apiclient": "^2.7",
+        "mailjet/mailjet-apiv3-php": "^1.5.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cloudstuff\\ApiUtil\\": "src/"
+        }
+    }
+}
