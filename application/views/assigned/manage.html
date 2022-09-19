@@ -1,0 +1,92 @@
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="page-title-box">
+							<h4 class="page-title">Assigned Manage</h4>
+							<ol class="breadcrumb float-right">
+								<li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+								<li class="breadcrumb-item active">Manage Assigned</li>
+							</ol>
+							<div class="clearfix"></div>
+						</div>
+						{echo Shared\Markup::message($message ?? null)}
+					</div>
+				</div>
+				<div class="card"><br>
+					<div class="text-start px-md-2">
+						<a class="btn btn-outline-primary"  href="/assigned/add" padding="10px"><i class="fa fa-plus"></i> Assign New</a>
+					</div><br>
+					{if $assigneds}
+					<div class="table-responsive">
+						<table class="table table-hover" cellspacing="10" cellpadding="10">
+							<thead>
+								<tr>
+									<th>Asset</th>
+									<th>Employee</th>
+									<th>Assign Date</th>
+									<th>Handover Date</th>
+									<td>Action</td>
+								</tr>
+							</thead>
+							<tbody>
+								{foreach $obj in $assigneds}
+								<tr data-id='{echo $obj->_id}'>
+									<td>
+										{if $obj->asset_id}
+											{script $a = $assets[$obj->asset_id]}
+											{if $a}
+												({echo $a->name}) {echo $a->asset_type}
+											{/if}
+										{/if}
+									</td>
+									<td>
+										{if $obj->emp_id}
+											{script $e = $employees[$obj->emp_id]}
+											{if $e}
+												{echo $e->name}
+											{/if}
+										{/if}
+									</td>
+									<td>
+										{if $obj->assign_date}
+										{echo Framework\TimeZone::printDate($obj->assign_date)}
+										{/if}
+									</td>
+									<td>
+										{if $obj->handover_date}
+											{echo Framework\TimeZone::printDate($obj->handover_date)}
+										{/if}
+									</td>
+									<td> <a data-href="/assigned/delete/{echo $obj->_id}" class="btn btn-xs btn-outline-danger delete"><i class="fa fa-trash"></i> Delete</a>
+									<a class="btn btn-outline-primary"  href="/assigned/edit/{echo $obj->_id}" padding="10px"><i class="fa fa-pencil-square-o"></i>Edit</a></td>
+								</tr>
+								{/foreach}
+								
+							</tbody>
+						</table>
+					</div>
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center">
+							{if ($page != 1)}
+							<li class="page-item"><a class="page-link" href="{echo Shared\Markup::pagination($page - 1)}">Previous</a></li>
+							{/if}
+							<li class="page-item"><a class="page-link" href="{echo Shared\Markup::pagination($page + 1)}">Load More</a></li>
+						</ul>
+					</nav>
+					{/if} {else}
+					<div class="card-body">
+						<p class="card-text">No Assigneds Found</p>
+					</div>
+					{/else}
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+</script>

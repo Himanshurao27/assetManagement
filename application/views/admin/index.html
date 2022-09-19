@@ -1,0 +1,27 @@
+<div class="content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="page-title-box">
+					<h4 class="page-title">Dashboard</h4>
+					<ol class="breadcrumb float-right">
+						<li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+						<li class="breadcrumb-item active">Home</li>
+					</ol>
+					<div class="clearfix"></div>
+				</div>
+				{echo Shared\Markup::message($message ?? null)}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<ul class="list-group">
+					<li class="list-group-item"> Assets <span class="pull-right">{echo  $totalAssets}</span></li>
+					<li class="list-group-item"> Employees <span class="pull-right">{echo $totalAssigneds}</span></li>
+					<li class="list-group-item"> Assigned <span class="pull-right">{echo $totalEmployees}</span></li>
+					<li class="list-group-item"> Vendors <span class="pull-right">{echo $totalVenders}</span></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

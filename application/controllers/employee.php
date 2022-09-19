@@ -1,0 +1,102 @@
+<?php
+
+
+use Framework\{Registry, TimeZone, ArrayMethods};
+use Shared\Services\Db;
+
+class Employee extends Shared\Controller {
+
+	/**
+	 * @before _secure
+	 */
+	public function add(){
+		try {
+			if ($this->request->isPost()) {
+				$data = $this->request->post('data', []);
+				$data = array_merge($data, ['user_id' => $this->account->_id]);
+				$asset = new \Models\employee($data);
+				$asset->save();
+				\Shared\Utils::flashMsg(['type' => 'success', 'text' => 'Employee Added created successfully']);
+				$this->redirect('/employee/manage');
+				
+			}
+		} catch (\Exception $e) {
+			\Shared\Utils::flashMsg(['type' => 'error', 'text' => $e->getMessage()]);
+		}
+	}
+
+	/**
+	 * @before _secure
+	 */
+	public function manage() {
+		$view = $this->getActionView();
+
+		$limit = $this->request->get("limit", 10, ["type" => "numeric", "maxVal" => 500]);
+		$page = $this->request->get("page", 1, ["type" => "numeric", "maxVal" => 100]);
+
+		$uiQuery = $this->request->get("query", []);
+		$query = ['user_id' => $this->account->_id];
+
+		$employees = \Models\employee::cacheAllv2($query, [], ['maxTimeMS' => 5000, 'page' => $page, 'limit' => $limit, 'direction' => 'desc', 'order' => ['created' => -1]]);
+		$total = $count = \Models\employee::count($query);
+
+		$view->set([
+			'employees' => $employees ?? [],
+			'limit' => $limit, 'page' => $page,
+			'query' => $uiQuery
+		]);
+	}
+
+	/**
+	 * @before _secure
+	 */
+	public function delete($id = null) {
+		$view = $this->getActionView();
+		if (!$id || !$this->request->isDelete()) {
+			\Shared\Utils::flashMsg(['type' => 'error', 'text' => 'Invalid Request']);
+			$this->redirect('/employee/manage');
+		}
+
+		$employee = \Models\employee::findById($id);
+		if (!$employee) {
+			return $view->set('message', ['type' => 'error', 'text' => 'No Employee found!']);
+		}
+		$msg = "";
+		try {
+			$employee->delete();
+			$msg = ['type' => 'success', 'text' => 'Employee deleted successfully!'];
+		} catch (\Exception $e) {
+			$msg = ['type' => 'error', 'text' => 'Something went wrong. Please Try Again'];
+		}
+	}
+
+	/**
+	 * @before _secure
+	 */
+	public function edit($id = null) {
+		$view = $this->getActionView();
+		if (!$id) {
+			$this->_404();
+		}
+		$employee = \Models\employee::findById($id);
+		if (!$employee) {
+			return $view->set('message', ['type' => 'error', 'text' => 'No Employee found!']);
+		}
+		try {
+			if ($this->request->isPost()) {
+				$data = $this->request->post('data', []);
+				foreach(['name', 'emp_id', 'email', 'phone'] as $value) {
+					if (isset($data[$value])) {
+						$employee->$value = $data[$value];
+					}
+				}
+				$employee->save();
+				$view->set('message', ['type' => 'success', 'text' => 'Employee Edited successfully']);
+				
+			}
+		} catch (\Exception $e) {
+			$view->set('message', ['type' => 'error', 'text' => $e->getMessage()]);
+		}
+		$view->set('employee', $employee);
+	}
+}
