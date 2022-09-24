@@ -47,7 +47,7 @@
 						<div class="form-group row">
 							<label class="col-sm-3 col-form-label">Handover Date</label>
 							<div class="col-sm-9 col-md-6">
-								<input class="form-control" name="data[handover_date]" value="{echo $assigned->handover_date->format('Y-m-d')}" type="date" placeholder="Select handover date">
+								<input class="form-control" name="data[handover_date]" value="{echo $assigned->handover_date ? $assigned->handover_date->format('Y-m-d') : ''}" type="date" placeholder="Select handover date">
 							</div>
 						</div>
 						<div class="form-group">

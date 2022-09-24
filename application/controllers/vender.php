@@ -41,7 +41,7 @@ class Vender extends Shared\Controller {
 		$query = ['user_id' => $this->account->_id];
 
         $venders = \Models\vender::cacheAllv2($query, [], ['maxTimeMS' => 5000, 'page' => $page, 'limit' => $limit, 'direction' => 'desc', 'order' => ['created' => -1]]);
-		$total = $count = \Models\vender::count($query);
+		$count = \Models\vender::count($query);
 
 		$view->set([
 			'venders' => $venders ?? [],
