@@ -44,17 +44,24 @@ class Assigned extends Shared\Controller {
 		$limit = $this->request->get("limit", 10, ["type" => "numeric", "maxVal" => 500]);
 		$page = $this->request->get("page", 1, ["type" => "numeric", "maxVal" => 100]);
 
-		$uiQuery = $this->request->get("query", []);
 		$query = ['user_id' => $this->account->_id];
+		$uiQuery = $this->request->get("query", []);
+		if ($uiQuery) {
+			foreach (['asset_id', 'emp_id'] as $key) {
+				if (isset($uiQuery[$key]) && $uiQuery[$key]) {
+					$query[$key] = $uiQuery[$key];
+				}
+			}
+		}
 
-        $assigneds = \Models\Assigned::cacheAllv2($query, [], ['maxTimeMS' => 5000, 'page' => $page, 'limit' => $limit, 'direction' => 'desc', 'order' => ['created' => -1]]);
+        $assigneds = \Models\Assigned::selectAll($query, [], ['maxTimeMS' => 5000, 'page' => $page, 'limit' => $limit, 'direction' => 'desc', 'order' => ['created' => -1]]);
         $empIds = ArrayMethods::arrayKeys($assigneds, 'emp_id');
         if ($empIds) {
-            $employees = \Models\Employee::cacheAllv2(['user_id' => $this->account->_id, '_id' => ['$in' => $empIds]], ['_id', 'name'], ['maxTimeMS' => 5000, 'limit' => 5000, 'direction' => 'desc', 'order' => ['created' => -1]]);
+            $employees = \Models\Employee::cacheAllv2(['user_id' => $this->account->_id, '_id' => ['$in' => $empIds]], ['_id', 'name'], ['maxTimeMS' => 5000]);
         }
         $assetIds = ArrayMethods::arrayKeys($assigneds, 'asset_id');
         if ($assetIds) {
-            $assets = \Models\Asset::cacheAllv2(['user_id' => $this->account->_id, '_id' => ['$in' => $assetIds]], ['_id', 'name', 'asset_type'], ['maxTimeMS' => 5000, 'limit' => 5000, 'direction' => 'desc', 'order' => ['created' => -1]]);
+            $assets = \Models\Asset::selectAll(['user_id' => $this->account->_id, '_id' => ['$in' => $assetIds]], ['_id', 'name', 'asset_type'], ['maxTimeMS' => 5000]);
         }
         $total = $count = \Models\Assigned::count($query);
 

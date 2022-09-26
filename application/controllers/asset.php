@@ -18,6 +18,9 @@ class Asset extends Shared\Controller {
 		try {
 			if ($this->request->isPost()) {
 				$data = $this->request->post('data', []);
+				if (!in_array($data['asset_type'], ['accessories', 'ipad', 'phone', 'laptop', 'car'])) {
+					throw new Exception("wrong asset type selected");
+				}
 				$data = array_merge($data, ['user_id' => $this->account->_id]);
 				$asset = new Models\Asset($data);
 				$asset->save();
@@ -42,8 +45,15 @@ class Asset extends Shared\Controller {
 		$limit = $this->request->get("limit", 10, ["type" => "numeric", "maxVal" => 500]);
 		$page = $this->request->get("page", 1, ["type" => "numeric", "maxVal" => 100]);
 
-		$uiQuery = $this->request->get("query", []);
 		$query = ['user_id' => $this->account->_id];
+		$uiQuery = $this->request->get("query", []);
+		if ($uiQuery) {
+			foreach (['status', 'asset_type', 'ven_id', 'name'] as $key) {
+				if (isset($uiQuery[$key]) && $uiQuery[$key]) {
+					$query[$key] = $uiQuery[$key];
+				}
+			}
+		}
 
 		$assets = \Models\Asset::cacheAllv2($query, [], ['maxTimeMS' => 5000, 'page' => $page, 'limit' => $limit, 'direction' => 'desc', 'order' => ['created' => -1]]);
 		$venders = \Models\Vender::cacheAllv2(['user_id' => $this->account->_id], [], ['maxTimeMS' => 5000, 'limit' => 5000, 'direction' => 'desc', 'order' => ['created' => -1]]);

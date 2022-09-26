@@ -37,8 +37,42 @@ class Vender extends Shared\Controller {
 		$limit = $this->request->get("limit", 10, ["type" => "numeric", "maxVal" => 500]);
 		$page = $this->request->get("page", 1, ["type" => "numeric", "maxVal" => 100]);
 
-		$uiQuery = $this->request->get("query", []);
 		$query = ['user_id' => $this->account->_id];
+		$searchKeyType = strtolower($this->request->get('type'));
+		$searchValue = $this->request->get('search');
+		switch ($searchKeyType) {
+			case 'name':
+				$query = array_merge($query, ['name' => Db::convertType($searchValue, 'regex')]);
+				break;
+
+			case 'comapnyName':
+				$query = array_merge($query, ['company_name' => Db::convertType($searchValue, 'regex')]);
+				break;
+
+			case 'emp_id':
+				$query = array_merge($query, ['emp_id' => $searchValue]);
+				break;
+
+			case 'phone':
+				$query = array_merge($query, ['phone' => Db::convertType($searchValue, 'regex')]);
+				break;
+		
+			case 'email':
+				$query = array_merge($query, ['email' => Db::convertType($searchValue, 'regex')]);
+				break;
+
+			case 'address':
+				$query = array_merge($query, ['address' => Db::convertType($searchValue, 'regex')]);
+				break;
+			
+			case 'state':
+				$query = array_merge($query, ['state' => Db::convertType($searchValue, 'regex')]);
+				break;
+
+			case 'country':
+				$query = array_merge($query, ['country' => Db::convertType($searchValue, 'regex')]);
+				break;
+		}
 
         $venders = \Models\vender::cacheAllv2($query, [], ['maxTimeMS' => 5000, 'page' => $page, 'limit' => $limit, 'direction' => 'desc', 'order' => ['created' => -1]]);
 		$count = \Models\vender::count($query);
@@ -46,7 +80,8 @@ class Vender extends Shared\Controller {
 		$view->set([
 			'venders' => $venders ?? [],
 			'limit' => $limit, 'page' => $page,
-			'query' => $uiQuery
+			'search' => $this->request->get('search', ''),
+			'type' => $this->request->get('type', '')
 		]);
 	}
 

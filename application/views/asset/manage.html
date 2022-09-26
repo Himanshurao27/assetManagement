@@ -15,6 +15,53 @@
 						{echo Shared\Markup::message($message ?? null)}
 					</div>
 				</div>
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Asset Search</h5>
+						<form method="get">
+							<div class="form-row">
+								<div class="form-group col-sm-2">Asset Name</div>
+								<div class="form-group col-sm-2">Status</div>
+								<div class="form-group col-sm-2">Type</div>
+								<div class="form-group col-sm-2">Vendor</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-sm-2">
+									<input type="text" name="query[name]" class="form-control" value="{echo $query['name']}" placeholder = "Search asset name">
+								</div>
+								<div class="form-group col-sm-2">
+									<select class="form-control" name="query[status]" value="{echo $query['status'] ?? ''}">
+										<option value="">All</option>
+										<option value="assigned">Assigned</option>
+										<option value="available">Available</option>
+										<option value="discarded">Discarded</option>
+									</select>
+								</div>
+								<div class="form-group col-sm-2">
+									<select class="form-control" name="query[asset_type]" value="{echo $query['asset_type']}">
+										<option value="car">Car</option>
+										<option value="laptop">Laptop</option>
+										<option value="phone">Phone</option>
+										<option value="ipad">Ipad</option>
+										<option value="accessories">Accessories</option>
+									</select>
+								</div>
+								<div class="form-group col-sm-2">
+									<select class="form-control" name="query[ven_id]" value="{echo $query['ven_id']}">
+											{foreach $v in $venders}
+											<option value="{echo $v->_id}">({echo $v->name}) {echo $v->company_name}</option>
+											{/foreach}
+									</select>
+								</div>
+								<div class="form-group col-sm-1">
+									<button type="submit" class="btn btn-outline-primary">
+									<i class="fa fa-search"></i> Submit
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div><br>
 				<div class="card"><br>
 					<div class="text-start px-md-2">
 					<a class="btn btn-outline-primary"  href="/asset/add" padding="10px"><i class="fa fa-plus"></i> Add new Assets</a>

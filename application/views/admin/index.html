@@ -16,10 +16,18 @@
 		<div class="row">
 			<div class="col-md-3">
 				<ul class="list-group">
-					<li class="list-group-item"> Assets <span class="pull-right">{echo  $totalAssets}</span></li>
-					<li class="list-group-item"> Employees <span class="pull-right">{echo $totalAssigneds}</span></li>
-					<li class="list-group-item"> Assigned <span class="pull-right">{echo $totalEmployees}</span></li>
-					<li class="list-group-item"> Vendors <span class="pull-right">{echo $totalVenders}</span></li>
+					<li class="list-group-item "><i class="fa fa-address-card fa-fw"></i> Assets <span class="pull-right badge badge-primary badge-pill">{echo  count($Assets)}</span></li>
+					<li class="list-group-item"><i class="fa fa-address-book fa-fw"></i> Employees <span class="pull-right badge badge-primary badge-pill">{echo count($Assigneds)}</span></li>
+					<li class="list-group-item"><i class="fa fa-book fa-fw"></i>Assigned <span class="pull-right badge badge-primary badge-pill">{echo count($Employees)}</span></li>
+					<li class="list-group-item"><i class="fa fa-users fa-fw"></i> Vendors <span class="pull-right badge badge-primary badge-pill">{echo count($Venders)}</span></li>
+				</ul>
+			</div>
+			<div class="col-md-3">
+				<ul class="list-group">
+					<li class="list-group-item"><i class="fa fa-address-card fa-fw"></i> Assets</li>
+					<li class="list-group-item"> Assigned <span class="pull-right">{echo count($AssetAss)}</span></li>
+					<li class="list-group-item"> Available <span class="pull-right">{echo count($AssetAva)}</span></li>
+					<li class="list-group-item"> Discarded <span class="pull-right">{echo count($AssetDis)}</span></li>
 				</ul>
 			</div>
 		</div>
