@@ -34,7 +34,7 @@ class Auth extends Shared\Controller {
 			$pass = sha1($this->request->post('password'));
 			$account = \Models\Account::first(['email' => $email]);
 			if ($account && $account->password != $pass) {
-				return $view->set('message', 'Wrong Password');
+				return $view->set('message', [ "type" => "warning", "text" => "'Wrong Password'" ]);
 			}
 			if ($account && $account->password == $pass) {
 				$this->setAccount($account);
