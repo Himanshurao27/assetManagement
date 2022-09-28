@@ -55,7 +55,7 @@ class Employee extends Shared\Controller {
 				break;
 		}
 
-		$employees = \Models\employee::cacheAllv2($query, [], ['maxTimeMS' => 5000, 'page' => $page, 'limit' => $limit, 'direction' => 'desc', 'order' => ['created' => -1]]);
+		$employees = \Models\employee::selectAll($query, [], ['maxTimeMS' => 5000, 'page' => $page, 'limit' => $limit, 'direction' => 'desc', 'order' => ['created' => -1]]);
 		$total = $count = \Models\employee::count($query);
 
 		$view->set([
@@ -83,10 +83,11 @@ class Employee extends Shared\Controller {
 		$msg = "";
 		try {
 			$employee->delete();
-			$msg = ['type' => 'success', 'text' => 'Employee deleted successfully!'];
+			$msg = 'Employee deleted successfully!';
 		} catch (\Exception $e) {
 			$msg = ['type' => 'error', 'text' => 'Something went wrong. Please Try Again'];
 		}
+		$view->set('message', $msg);
 	}
 
 	/**

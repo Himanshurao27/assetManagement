@@ -91,10 +91,11 @@ class Assigned extends Shared\Controller {
 		$msg = "";
 		try {
 			$asset->delete();
-			$msg = ['type' => 'success', 'text' => 'Assigned deleted successfully!'];
+			$msg = 'Assigned deleted successfully!';
 		} catch (\Exception $e) {
 			$msg = ['type' => 'error', 'text' => 'Something went wrong. Please Try Again'];
 		}
+		$view->set('message', $msg);
 	}
 
     /**

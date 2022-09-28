@@ -102,10 +102,11 @@ class Vender extends Shared\Controller {
 		$msg = "";
 		try {
 			$vender->delete();
-			$msg = ['type' => 'success', 'text' => 'Vender deleted successfully!'];
+			$msg = 'Vender deleted successfully!';
 		} catch (\Exception $e) {
 			$msg = ['type' => 'error', 'text' => 'Something went wrong. Please Try Again'];
 		}
+		$view->set('message', $msg);
 	}
 
     	/**
