@@ -3,8 +3,6 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="Network Login" />
 
 		<title>Asset Mangment</title>
 
@@ -25,11 +23,17 @@
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="Content-Language" content="en">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
+		<meta name="description" content="This is an example dashboard created using build-in elements and components.">
+		<meta name="msapplication-tap-highlight" content="no">
+		<link href="https://demo.dashboardpack.com/architectui-html-free/main.css" rel="stylesheet">
 	</head>
 
-	<body class="fixed-left">
+	<body id="page-top">
 		<!-- Begin page -->
-		<div id="wrapper" {if !isset($navbar)}class="enlarged forced"{/if}>
+		<div id="wrapper" {if !isset($navbar)}class="app-container enlarged forced closed-sidebar"{/if}>
 			{include layouts/navs/admin.html}
 			<div class="content-page">
 				<!-- Start content -->
@@ -37,9 +41,6 @@
 				<!-- end content -->
 			</div>
 		</div>
-
-		<script>var resizefunc = [];</script>
-		<!-- Theme Plugins  -->
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -63,5 +64,9 @@
 		<script src="/assets/js/charts.js"></script>
 		<script src="/assets/js/su-1.0.0.js"></script>
 		<script src="/assets/js/components.js?v=1.0.0"></script>
+
+		<script>var resizefunc = [];</script>
+		<!-- Theme Plugins  -->
+		 <script type="text/javascript" src="https://demo.dashboardpack.com/architectui-html-free/assets/scripts/main.js"></script>
 	</body>
 </html>

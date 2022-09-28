@@ -46,7 +46,7 @@ class Auth extends Shared\Controller {
 				}
 				$this->redirect('/admin/index');
 			} else {
-				$view->set('message', 'email and password do not match');
+				$view->set('message', [ "type" => "warning", "text" => "email and password do not match" ]);
 			}
 		}
 	}

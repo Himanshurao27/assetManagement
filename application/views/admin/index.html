@@ -1,35 +1,61 @@
-<div class="content">
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-12">
-				<div class="page-title-box">
-					<h4 class="page-title">Dashboard</h4>
-					<ol class="breadcrumb float-right">
-						<li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-						<li class="breadcrumb-item active">Home</li>
-					</ol>
-					<div class="clearfix"></div>
-				</div>
-				{echo Shared\Markup::message($message ?? null)}
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-3">
-				<ul class="list-group">
-					<li class="list-group-item "><i class="fa fa-address-card fa-fw"></i> Assets <span class="pull-right badge badge-primary badge-pill">{echo  count($Assets)}</span></li>
-					<li class="list-group-item"><i class="fa fa-address-book fa-fw"></i> Employees <span class="pull-right badge badge-primary badge-pill">{echo count($Assigneds)}</span></li>
-					<li class="list-group-item"><i class="fa fa-book fa-fw"></i>Assigned <span class="pull-right badge badge-primary badge-pill">{echo count($Employees)}</span></li>
-					<li class="list-group-item"><i class="fa fa-users fa-fw"></i> Vendors <span class="pull-right badge badge-primary badge-pill">{echo count($Venders)}</span></li>
-				</ul>
-			</div>
-			<div class="col-md-3">
-				<ul class="list-group">
-					<li class="list-group-item"><i class="fa fa-address-card fa-fw"></i> Assets</li>
-					<li class="list-group-item"> Assigned <span class="pull-right">{echo count($AssetAss)}</span></li>
-					<li class="list-group-item"> Available <span class="pull-right">{echo count($AssetAva)}</span></li>
-					<li class="list-group-item"> Discarded <span class="pull-right">{echo count($AssetDis)}</span></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</div>
+<div class="col-sm-12">
+    <div class="col-sm-12">
+        <div class="card-body">
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body bg-happy-fisher">
+            <h5 class="card-title">Dashboard</h5>
+        </div>
+    </div><br>  
+    <div>
+        <div class="col-md-6 col-xl-4">
+            <div class="card mb-3 widget-content bg-midnight-bloom">
+                <div class="widget-content-wrapper text-white">
+                    <div class="widget-content-left">
+                        <div class="widget-heading">Total Assets</div>
+                    </div>
+                    <div class="widget-content-right">
+                        <div class="widget-numbers text-white"><span>{echo  count($Assets)}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+            <div class="card mb-3 widget-content bg-night-fade">
+                <div class="widget-content-wrapper text-white">
+                    <div class="widget-content-left">
+                        <div class="widget-heading">Total Employees</div>
+                    </div>
+                    <div class="widget-content-right">
+                        <div class="widget-numbers text-white"><span>{echo count($Employees)}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+            <div class="card mb-3 widget-content bg-grow-early">
+                <div class="widget-content-wrapper text-white">
+                    <div class="widget-content-left">
+                        <div class="widget-heading">Total Assigned</div>
+                    </div>
+                    <div class="widget-content-right">
+                        <div class="widget-numbers text-white"><span>{echo count($Assigneds)}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-4">
+            <div class="card mb-3 widget-content bg-malibu-beach">
+                <div class="widget-content-wrapper text-white">
+                    <div class="widget-content-left">
+                        <div class="widget-heading">Total Vendors</div>
+                    </div>
+                    <div class="widget-content-right">
+                        <div class="widget-numbers text-white"><span>{echo count($Venders)}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>   

@@ -50,7 +50,11 @@ class Asset extends Shared\Controller {
 		if ($uiQuery) {
 			foreach (['status', 'asset_type', 'ven_id', 'name'] as $key) {
 				if (isset($uiQuery[$key]) && $uiQuery[$key]) {
-					$query[$key] = $uiQuery[$key];
+					if ($key == 'name') {
+						$query[$key] = Db::convertType($uiQuery[$key], 'regex');
+					} else {
+						$query[$key] = $uiQuery[$key];
+					}
 				}
 			}
 		}
