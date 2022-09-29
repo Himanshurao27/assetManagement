@@ -48,23 +48,7 @@ class Asset extends \Shared\Model {
 	 */
 	protected $_ven_id;
 
-
     /**
-	 * @column
-	 * @readwrite
-	 * @type integer
-	 */
-	protected $_display_id;
-
-	/**
-	 * @column
-	 * @readwrite
-	 * @type datetime
-	 * @label Created
-	 */
-	protected $_date;
-
-     /**
 	 * @column
 	 * @readwrite
 	 * @type date
