@@ -74,7 +74,7 @@ class Vender extends Shared\Controller {
 				break;
 		}
 
-        $venders = \Models\vender::cacheAllv2($query, [], ['maxTimeMS' => 5000, 'page' => $page, 'limit' => $limit, 'direction' => 'desc', 'order' => ['created' => -1]]);
+        $venders = \Models\vender::selectAll($query, [], ['maxTimeMS' => 5000, 'page' => $page, 'limit' => $limit, 'direction' => 'desc', 'order' => ['created' => -1]]);
 		$count = \Models\vender::count($query);
 
 		$view->set([

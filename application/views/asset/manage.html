@@ -78,26 +78,26 @@
 								<table class="table table-hover" cellspacing="10" cellpadding="10">
 									<thead>
 										<tr>
-											<th>Name</th>
-											<th>Type</th>
-											<th>Purchase Date</th>
-											<th>Vendor</th>
-											<th>Description</th>
-											<th>Status</th>
-											<th>Action</th>
+											<th class="text-center">Name</th>
+											<th class="text-center">Type</th>
+											<th class="text-center">Purchase Date</th>
+											<th class="text-center">Vendor</th>
+											<th class="text-center">Description</th>
+											<th class="text-center">Status</th>
+											<th class="text-center">Action</th>
 										</tr>
 									</thead>
 									<tbody>
 										{foreach $obj in $assets}
 										<tr data-id='{echo $obj->_id}'>
-											<td>{echo $obj->name}</td>
-											<td>{echo $obj->asset_type}</td>
-											<td>
+											<td class="text-center">{echo $obj->name}</td>
+											<td class="text-center">{echo $obj->asset_type}</td>
+											<td class="text-center">
 												{if $obj->pur_date}
 													{echo Framework\TimeZone::printDate($obj->pur_date)}
 												{/if}
 											</td>
-											<td>
+											<td class="text-center">
 												{if $obj->ven_id}
 													{script $v = $venders[$obj->ven_id]}
 													{if $v}
@@ -105,9 +105,17 @@
 													{/if}
 												{/if}
 											</td>
-											<td>{echo $obj->description}</td>
-											<td>{echo $obj->status}</td>
-											<td> <a data-href="/asset/delete/{echo $obj->_id}" class="btn btn-xs btn-outline-danger delete"><i class="fa fa-trash"></i> Delete</a>
+											<td class="text-center">{echo $obj->description}</td>
+											<td class="text-center">
+												{if $obj->status == available} 
+												<div class="badge badge-success">Available</div> 
+												{/if} {elseif $obj->status == assigned}
+												<div class="badge badge-info">Assigned</div> 
+												{/elseif} {elseif $obj->status == discarded} 
+												<div class="badge badge-danger">Discarded</div>
+												{/elseif}
+											</td>
+											<td class="text-center"> <a data-href="/asset/delete/{echo $obj->_id}" class="btn btn-xs btn-outline-danger delete"><i class="fa fa-trash"></i> Delete</a>
 											<a class="btn btn-outline-primary"  href="/asset/edit/{echo $obj->_id}" padding="10px"><i class="fa fa-pencil-square-o"></i>Edit</a></td>
 										</tr>
 										{/foreach}

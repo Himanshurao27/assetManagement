@@ -1,59 +1,147 @@
-<div class="container">
-	<div class="row">
-		<div class="login-box">
-			<div class="col-lg-12 login-key">
-				<i class="fa fa-book" aria-hidden="true"></i>
-			</div>
-			<div class="col-lg-12 login-title">ASSET MANAGEMENT</div>
-			<div class="col-lg-12 login-form">
-				<div class="col-lg-12 login-form">
-					<form action="" method="post">
-						{if isset($message)}
-							{echo Shared\Markup::message($message ?? null)}
-						{/if}
-						<div class="form-group">
-							<label class="form-control-label">EMAIL</label>
-							<input type="text" required="" name="email" class="form-control">
-						</div>
-						<div class="form-group">
-							<label class="form-control-label">PASSWORD</label>
-							<input type="password" name="password" required="" class="form-control" i>
-						</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/fontawesome.min.css" integrity="sha512-RvQxwf+3zJuNwl4e0sZjQeX7kUa3o82bDETpgVCH2RiwYSZVDdFJ7N/woNigN/ldyOOoKw8584jM4plQdt8bhA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-						<div class="col-lg-12 loginbttm">
-							<div class="col-lg-6 login-btm login-text">
-								<!-- Error Message -->
-							</div>
-							<div class="col-lg-6 login-btm login-button">
-								<button type="submit" class="btn btn-outline-primary">LOGIN</button>
-							</div>
-						</div>
-						<input type="hidden" name="action" value="login">
-						<input type="hidden" name="token" value="{echo $__token}">
-					</form>
-				</div>
-			</div>
-			
+
+  <div class="fullscreen-container">
+	<div class="login-container">
+		<div class="col-lg-12 login-key center">
+			<i class="fa fa-book" aria-hidden="true"></i>
+		</div><br>
+		<h2 class="header">ASSET MANAGEMENT</h2>
+		<form class="form" action="" method="post">
+		{if isset($message)}
+			{echo Shared\Markup::message($message ?? null)}
+		{/if}
+		<div class="input-group">
+		  <label for="email">Email</label>
+		  <input type="text" id="username"  required="" name="email" placeholder="Type your email">
 		</div>
+		<div class="input-group">
+		  <label for="password">Password</label>
+		  <input type="password" id="password" name="password" required="" placeholder="Type your password">
+		</div>
+		<button class="button">Login</button>
+		<input type="hidden" name="action" value="login">
+		<input type="hidden" name="token" value="{echo $__token}">
+	  </form>
 	</div>
+  </div>
 
 
 <style>
 
+	*,
+	*::before,
+	*::after {
+	box-sizing: border-box;
+	padding: 0;
+	}
+
 	body {
-		background: #222D32;
-		font-family: 'Roboto', sans-serif;
+	margin: 0;
+	font-family: "Open Sans", sans-serif;
 	}
-	
-	.login-box {
-		margin-top: 80px;
-		height: auto;
-		background: #1A2226;
-		text-align: center;
-		box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+
+	.fullscreen-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	width: 100vw;
+	background: linear-gradient(53deg, rgba(25,191,203,1) 6%, rgba(188,81,218,1) 61%);
+
 	}
-	
+
+	.login-container {
+	width: 50%;
+	max-width: 400px;
+	min-width: 300px;
+	padding: 50px 25px 20px;
+	background: white;
+	border-radius: 10px;
+	}
+
+	.header {
+	text-align: center;
+	}
+
+	.form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-top: 50px;
+	}
+
+	.input-group {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	font-size: .8rem;
+	}
+
+	.input-group input {
+	font-size: .9rem;
+	padding: 10px;
+	border: none;
+	outline: none;
+	border-bottom: 2px solid hsl(0, 0%, 83%);
+	}
+
+	.input-group input:focus {
+	box-shadow: 0 0 0 1px hsl(178, 100%, 50%);
+	border-bottom: 2px solid hsl(0, 0%, 83%, 0%);
+	}
+
+	.button {
+	margin: 20px 0;
+	padding: 10px 0;
+	border-radius: 25px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	background: linear-gradient(53deg, rgba(25,191,203,1) 6%, rgba(188,81,218,1) 73%);
+	color: white;
+	font-size: 1rem;
+	}
+
+	.button:focus {
+	box-shadow: 0 0 0 1px hsl(178, 100%, 50%);
+	}
+
+	.signup-header {
+	text-align: center;
+	font-weight: 200;
+	font-size: .9rem;
+	margin-top: 75px;
+	}
+
+	.social-icons {
+	margin-top: 20px;
+	}
+
+	.social-list {
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	}
+
+	.social-links {
+	text-decoration: none;
+	}
+
+	.fa-brands {
+	font-size: 1.75rem;
+	}
+
+	.fa-facebook {
+	border-radius: 50%;
+	background: white;
+	color: #435892;
+	}
+
 	.login-key {
+		text-align: center;
 		height: 100px;
 		font-size: 80px;
 		line-height: 100px;
@@ -61,110 +149,5 @@
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 	}
-	
-	.login-title {
-		margin-top: 15px;
-		text-align: center;
-		font-size: 30px;
-		letter-spacing: 2px;
-		margin-top: 15px;
-		font-weight: bold;
-		color: #ECF0F5;
-	}
-	
-	.login-form {
-		margin-top: 25px;
-		text-align: left;
-	}
-	
-	input[type=text] {
-		background-color: #1A2226;
-		border: none;
-		border-bottom: 2px solid #0DB8DE;
-		border-top: 0px;
-		border-radius: 0px;
-		font-weight: bold;
-		outline: 0;
-		margin-bottom: 20px;
-		padding-left: 0px;
-		color: #ECF0F5;
-	}
-	
-	input[type=password] {
-		background-color: #1A2226;
-		border: none;
-		border-bottom: 2px solid #0DB8DE;
-		border-top: 0px;
-		border-radius: 0px;
-		font-weight: bold;
-		outline: 0;
-		padding-left: 0px;
-		margin-bottom: 20px;
-		color: #ECF0F5;
-	}
-	
-	.form-group {
-		margin-bottom: 40px;
-		outline: 0px;
-	}
-	
-	.form-control:focus {
-		border-color: inherit;
-		-webkit-box-shadow: none;
-		box-shadow: none;
-		border-bottom: 2px solid #0DB8DE;
-		outline: 0;
-		background-color: #1A2226;
-		color: #ECF0F5;
-	}
-	
-	input:focus {
-		outline: none;
-		box-shadow: 0 0 0;
-	}
-	
-	label {
-		margin-bottom: 0px;
-	}
-	
-	.form-control-label {
-		font-size: 10px;
-		color: #6C6C6C;
-		font-weight: bold;
-		letter-spacing: 1px;
-	}
-	
-	.btn-outline-primary {
-		border-color: #0DB8DE;
-		color: #0DB8DE;
-		border-radius: 0px;
-		font-weight: bold;
-		letter-spacing: 1px;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-	}
-	
-	.btn-outline-primary:hover {
-		background-color: #0DB8DE;
-		right: 0px;
-	}
-	
-	.login-btm {
-		float: left;
-	}
-	
-	.login-button {
-		padding-right: 0px;
-		text-align: right;
-		margin-bottom: 25px;
-	}
-	
-	.login-text {
-		text-align: left;
-		padding-left: 0px;
-		color: #A2A4A4;
-	}
-	
-	.loginbttm {
-		padding: 0px;
-	}
+
 </style>
