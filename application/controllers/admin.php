@@ -35,10 +35,10 @@ class Admin extends Controller {
 			}
 		}
 
-		$view->set('Assets', $assets)
-			->set('Employees', $employees)
-			->set('Assigneds', $assigneds)
-			->set('AssetAva', $assetAva)
+		$view->set('Assets', $assets ?? [])
+			->set('Employees', $employees ?? [])
+			->set('Assigneds', $assigneds ?? [])
+			->set('AssetAva', $assetAva ?? [])
 			->set('AssetAss', $assetAss ?? [])
 			->set('AssetDis', $assetDis ?? [])
 			->set('Venders', $venders ?? []);
