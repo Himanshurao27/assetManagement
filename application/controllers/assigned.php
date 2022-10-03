@@ -22,7 +22,7 @@ class Assigned extends Shared\Controller {
 				$data = array_merge($data, ['user_id' => $this->account->_id]);
 				$asset = new \Models\Assigned($data);
 				$asset->save();
-				\Shared\Utils::flashMsg(['type' => 'success', 'text' => 'Assigned Added created successfully']);
+				\Shared\Utils::flashMsg(['type' => 'success', 'text' => 'Assigned Added successfully']);
 				$this->redirect('/assigned/manage');
 				
 			}
@@ -41,9 +41,6 @@ class Assigned extends Shared\Controller {
 	public function manage() {
 		$view = $this->getActionView();
 
-		$limit = $this->request->get("limit", 10, ["type" => "numeric", "maxVal" => 500]);
-		$page = $this->request->get("page", 1, ["type" => "numeric", "maxVal" => 100]);
-
 		$query = ['user_id' => $this->account->_id];
 		$uiQuery = $this->request->get("query", []);
 		if ($uiQuery) {
@@ -54,7 +51,7 @@ class Assigned extends Shared\Controller {
 			}
 		}
 
-        $assigneds = \Models\Assigned::selectAll($query, [], ['maxTimeMS' => 5000, 'page' => $page, 'limit' => $limit, 'direction' => 'desc', 'order' => ['created' => -1]]);
+        $assigneds = \Models\Assigned::selectAll($query, [], ['maxTimeMS' => 5000, 'direction' => 'desc', 'order' => ['created' => -1]]);
         $empIds = ArrayMethods::arrayKeys($assigneds, 'emp_id');
         if ($empIds) {
             $employees = \Models\Employee::cacheAllv2(['user_id' => $this->account->_id, '_id' => ['$in' => $empIds]], ['_id', 'name'], ['maxTimeMS' => 5000]);
@@ -69,7 +66,6 @@ class Assigned extends Shared\Controller {
 			'assigneds' => $assigneds ?? [],
             'assets' => $assets ?? [],
 			'employees' => $employees ?? [],
-			'limit' => $limit, 'page' => $page,
 			'query' => $uiQuery
 		]);
 	}

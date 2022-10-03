@@ -20,7 +20,7 @@ class Vender extends Shared\Controller {
 				$data = array_merge($data, ['user_id' => $this->account->_id]);
 				$asset = new \Models\vender($data);
 				$asset->save();
-				\Shared\Utils::flashMsg(['type' => 'success', 'text' => 'Vender Added created successfully']);
+				\Shared\Utils::flashMsg(['type' => 'success', 'text' => 'Vender Added successfully']);
 				$this->redirect('/vender/manage');
 			}
 		} catch (\Exception $e) {
@@ -33,9 +33,6 @@ class Vender extends Shared\Controller {
 	 */
 	public function manage() {
 		$view = $this->getActionView();
-
-		$limit = $this->request->get("limit", 10, ["type" => "numeric", "maxVal" => 500]);
-		$page = $this->request->get("page", 1, ["type" => "numeric", "maxVal" => 100]);
 
 		$query = ['user_id' => $this->account->_id];
 		$searchKeyType = strtolower($this->request->get('type'));
@@ -74,12 +71,11 @@ class Vender extends Shared\Controller {
 				break;
 		}
 
-        $venders = \Models\vender::selectAll($query, [], ['maxTimeMS' => 5000, 'page' => $page, 'limit' => $limit, 'direction' => 'desc', 'order' => ['created' => -1]]);
+        $venders = \Models\vender::selectAll($query, [], ['maxTimeMS' => 5000, 'direction' => 'desc', 'order' => ['created' => -1]]);
 		$count = \Models\vender::count($query);
 
 		$view->set([
 			'venders' => $venders ?? [],
-			'limit' => $limit, 'page' => $page,
 			'search' => $this->request->get('search', ''),
 			'type' => $this->request->get('type', '')
 		]);

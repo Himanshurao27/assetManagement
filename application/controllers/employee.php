@@ -16,7 +16,7 @@ class Employee extends Shared\Controller {
 				$data = array_merge($data, ['user_id' => $this->account->_id]);
 				$asset = new \Models\employee($data);
 				$asset->save();
-				\Shared\Utils::flashMsg(['type' => 'success', 'text' => 'Employee Added created successfully']);
+				\Shared\Utils::flashMsg(['type' => 'success', 'text' => 'Employee Added successfully']);
 				$this->redirect('/employee/manage');
 				
 			}
@@ -30,9 +30,6 @@ class Employee extends Shared\Controller {
 	 */
 	public function manage() {
 		$view = $this->getActionView();
-
-		$limit = $this->request->get("limit", 10, ["type" => "numeric", "maxVal" => 500]);
-		$page = $this->request->get("page", 1, ["type" => "numeric", "maxVal" => 100]);
 
 		$query = ['user_id' => $this->account->_id];
 		$searchKeyType = strtolower($this->request->get('type'));
@@ -55,12 +52,11 @@ class Employee extends Shared\Controller {
 				break;
 		}
 
-		$employees = \Models\employee::selectAll($query, [], ['maxTimeMS' => 5000, 'page' => $page, 'limit' => $limit, 'direction' => 'desc', 'order' => ['created' => -1]]);
+		$employees = \Models\employee::selectAll($query, [], ['maxTimeMS' => 5000, 'direction' => 'desc', 'order' => ['created' => -1]]);
 		$total = $count = \Models\employee::count($query);
 
 		$view->set([
 			'employees' => $employees ?? [],
-			'limit' => $limit, 'page' => $page,
 			'search' => $this->request->get('search', ''),
 			'type' => $this->request->get('type', 'name')
 		]);

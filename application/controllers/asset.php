@@ -24,7 +24,7 @@ class Asset extends Shared\Controller {
 				$data = array_merge($data, ['user_id' => $this->account->_id]);
 				$asset = new Models\Asset($data);
 				$asset->save();
-				\Shared\Utils::flashMsg(['type' => 'success', 'text' => 'Asset Added created successfully']);
+				\Shared\Utils::flashMsg(['type' => 'success', 'text' => 'Asset Added successfully']);
 				$this->redirect('/asset/manage');
 				
 			}
@@ -42,9 +42,6 @@ class Asset extends Shared\Controller {
 	public function manage() {
 		$view = $this->getActionView();
 
-		$limit = $this->request->get("limit", 10, ["type" => "numeric", "maxVal" => 500]);
-		$page = $this->request->get("page", 1, ["type" => "numeric", "maxVal" => 100]);
-
 		$query = ['user_id' => $this->account->_id];
 		$uiQuery = $this->request->get("query", []);
 		if ($uiQuery) {
@@ -59,13 +56,12 @@ class Asset extends Shared\Controller {
 			}
 		}
 
-		$assets = \Models\Asset::selectAll($query, [], ['maxTimeMS' => 5000, 'page' => $page, 'limit' => $limit, 'direction' => 'desc', 'order' => ['created' => -1]]);
-		$venders = \Models\Vender::selectAll(['user_id' => $this->account->_id], [], ['maxTimeMS' => 5000, 'limit' => 5000, 'direction' => 'desc', 'order' => ['created' => -1]]);
+		$assets = \Models\Asset::selectAll($query, [], ['maxTimeMS' => 5000, 'direction' => 'desc', 'order' => ['created' => -1]]);
+		$venders = \Models\Vender::selectAll(['user_id' => $this->account->_id], [], ['maxTimeMS' => 5000, 'direction' => 'desc', 'order' => ['created' => -1]]);
 
 		$view->set([
 			'assets' => $assets ?? [],
 			'venders' => $venders ?? [],
-			'limit' => $limit, 'page' => $page,
 			'query' => $uiQuery
 		]);
 	}
@@ -87,8 +83,6 @@ class Asset extends Shared\Controller {
 		$msg = "";
 		try {
 			$asset->delete();
-			var_dump($asset->delete());
-			die();
 			$msg = 'Asset deleted successfully!';
 		} catch (\Exception $e) {
 			$msg = ['type' => 'error', 'text' => 'Something went wrong. Please Try Again'];
