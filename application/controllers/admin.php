@@ -16,7 +16,7 @@ class Admin extends Controller {
 	public function index() {
 		$view = $this->getActionView();
 		$assets = \Models\Asset::selectAll(['user_id' => $this->account->_id], ['_id', 'type', 'status'], ['maxTimeMS' => 5000]);
-		$venders = \Models\Vender::selectAll(['user_id' => $this->account->_id], [], ['maxTimeMS' => 5000]);
+		$vendors = \Models\vendor::selectAll(['user_id' => $this->account->_id], [], ['maxTimeMS' => 5000]);
 		$employees = \Models\Employee::selectAll(['user_id' => $this->account->_id], [], ['maxTimeMS' => 5000]);
 		$assigneds = \Models\Assigned::selectAll(['user_id' => $this->account->_id], [], ['maxTimeMS' => 5000]);
 		foreach ($assets as $asset) {
@@ -41,7 +41,7 @@ class Admin extends Controller {
 			->set('AssetAva', $assetAva ?? [])
 			->set('AssetAss', $assetAss ?? [])
 			->set('AssetDis', $assetDis ?? [])
-			->set('Venders', $venders ?? []);
+			->set('vendors', $vendors ?? []);
 	}
 
 

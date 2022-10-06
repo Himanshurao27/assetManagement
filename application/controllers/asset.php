@@ -14,7 +14,7 @@ class Asset extends Shared\Controller {
 	 */
 	public function add(){
 		$view = $this->getActionView();
-        $venders = \Models\Vender::selectAll(['user_id' => $this->account->_id], [], ['maxTimeMS' => 5000, 'limit' => 5000, 'direction' => 'desc', 'order' => ['created' => -1]]);
+        $vendors = \Models\vendor::selectAll(['user_id' => $this->account->_id], [], ['maxTimeMS' => 5000, 'limit' => 5000, 'direction' => 'desc', 'order' => ['created' => -1]]);
 		try {
 			if ($this->request->isPost()) {
 				$data = $this->request->post('data', []);
@@ -32,7 +32,7 @@ class Asset extends Shared\Controller {
 			\Shared\Utils::flashMsg(['type' => 'error', 'text' => $e->getMessage()]);
 		}
 		$view->set([
-			'venders' => $venders ?? []
+			'vendors' => $vendors ?? []
 		]);
 	}
 
@@ -57,11 +57,11 @@ class Asset extends Shared\Controller {
 		}
 
 		$assets = \Models\Asset::selectAll($query, [], ['maxTimeMS' => 5000, 'direction' => 'desc', 'order' => ['created' => -1]]);
-		$venders = \Models\Vender::selectAll(['user_id' => $this->account->_id], [], ['maxTimeMS' => 5000, 'direction' => 'desc', 'order' => ['created' => -1]]);
+		$vendors = \Models\vendor::selectAll(['user_id' => $this->account->_id], [], ['maxTimeMS' => 5000, 'direction' => 'desc', 'order' => ['created' => -1]]);
 
 		$view->set([
 			'assets' => $assets ?? [],
-			'venders' => $venders ?? [],
+			'vendors' => $vendors ?? [],
 			'query' => $uiQuery
 		]);
 	}
@@ -99,7 +99,7 @@ class Asset extends Shared\Controller {
 			$this->_404();
 		}
 		$asset = Models\Asset::findById($id);
-		$venders = Models\vender::cacheAllv2(['user_id' => $this->account->_id], [], ['maxTimeMS' => 5000, 'limit' => 5000, 'direction' => 'desc', 'order' => ['created' => -1]]);
+		$vendors = Models\vendor::cacheAllv2(['user_id' => $this->account->_id], [], ['maxTimeMS' => 5000, 'limit' => 5000, 'direction' => 'desc', 'order' => ['created' => -1]]);
 		if (!$asset) {
 			return $view->set('message', ['type' => 'error', 'text' => 'No Asset found!']);
 		}
@@ -120,7 +120,7 @@ class Asset extends Shared\Controller {
 		}
         $view->set([
             'asset' => $asset ?? [],
-			'venders' => $venders ?? []
+			'vendors' => $vendors ?? []
 		]);
 	}
 }

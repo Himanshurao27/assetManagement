@@ -102,6 +102,5 @@ class Auth extends Shared\Controller {
 			\Shared\Utils::flashMsg(['type' => 'error', 'text' => $e->getMessage()]);
 		}
 	}
-
 }
 

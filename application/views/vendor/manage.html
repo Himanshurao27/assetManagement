@@ -6,11 +6,11 @@
 					<div class="col-sm-12">
 						<div class="row">
 							<div class="d-sm-flex align-items-center justify-content-between mb-4">
-								<h1 class="h3 mb-0 text-gray-800">Vender Manage</h1>
+								<h1 class="h3 mb-0 text-gray-800">vendor Manage</h1>
 							</div>
 							<!-- <div class="breadcrumb float-right">
 								<li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-								<li class="breadcrumb-item active">Manage Venders</li>
+								<li class="breadcrumb-item active">Manage vendors</li>
 							</div> -->
 						</div>
 						{echo Shared\Markup::message($message ?? null)}
@@ -18,7 +18,7 @@
 				</div>
 				<div class="card shadow mb-4">
 					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">Vender Search </h6>
+						<h6 class="m-0 font-weight-bold text-primary">vendor Search </h6>
 					</div>
 					<form class="card-body" method="get">
 						<div class="form-row">
@@ -46,13 +46,13 @@
 						</div>
 					</form>
 				</div>
-				{if $venders}
+				{if $vendors}
 				<div class="card shadow mb-4">
 					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">Vender Manage</h6>
+						<h6 class="m-0 font-weight-bold text-primary">vendor Manage</h6>
 					</div><br>
 					<div class="text-start px-md-2">
-						<a class="btn btn-outline-primary"  href="/vender/add" padding="10px"><i class="fa fa-plus"></i> Add new </a>
+						<a class="btn btn-outline-primary"  href="/vendor/add" padding="10px"><i class="fa fa-plus"></i> Add new </a>
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">
@@ -70,7 +70,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									{foreach $obj in $venders}
+									{foreach $obj in $vendors}
 									<tr data-id='{echo $obj->_id}'>
 										<td>{echo $obj->name}</td>
 										<td>{echo $obj->company_name}</td>
@@ -79,8 +79,8 @@
 										<td>{echo $obj->address}</td>
 										<td>{echo $obj->state}</td>
 										<td>{echo $obj->country}</td>
-										<td> <a data-href="/vender/delete/{echo $obj->_id}" class="btn btn-xs btn-outline-danger delete"><i class="fa fa-trash"></i> Delete</a>
-										<a class="btn btn-outline-primary"  href="/vender/edit/{echo $obj->_id}" padding="10px"><i class="fa fa-pencil-square-o"></i>Edit</a></td>
+										<td> <a data-href="/vendor/delete/{echo $obj->_id}" class="btn btn-xs btn-outline-danger delete"><i class="fa fa-trash"></i> Delete</a>
+										<a class="btn btn-outline-primary"  href="/vendor/edit/{echo $obj->_id}" padding="10px"><i class="fa fa-pencil-square-o"></i>Edit</a></td>
 									</tr>
 									{/foreach}
 								</tbody>
@@ -90,7 +90,7 @@
 				</div>
 				{/if} {else}
 				<div class="card-body">
-					<p class="card-text">No Venders Found</p>
+					<p class="card-text">No vendors Found</p>
 				</div>
 				{/else}
 				

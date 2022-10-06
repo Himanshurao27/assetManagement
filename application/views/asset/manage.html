@@ -53,7 +53,7 @@
 									<div class="form-group col-sm-2">
 										<select class="form-control" name="query[ven_id]" value="{echo $query['ven_id']}">
 											<option value="">All</option>
-											{foreach $v in $venders}
+											{foreach $v in $vendors}
 											<option value="{echo $v->_id}">({echo $v->name}) {echo $v->company_name}</option>
 											{/foreach}
 										</select>
@@ -99,7 +99,7 @@
 										</td>
 										<td>
 											{if $obj->ven_id}
-												{script $v = $venders[$obj->ven_id]}
+												{script $v = $vendors[$obj->ven_id]}
 												{if $v}
 													({echo $v->name}) {echo $v->company_name}
 												{/if}

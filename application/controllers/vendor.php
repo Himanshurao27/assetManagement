@@ -8,7 +8,7 @@
 use Framework\{Registry, TimeZone, ArrayMethods};
 use Shared\Services\Db;
 
-class Vender extends Shared\Controller {
+class vendor extends Shared\Controller {
 
 	/**
 	 * @before _secure
@@ -18,10 +18,10 @@ class Vender extends Shared\Controller {
 			if ($this->request->isPost()) {
 				$data = $this->request->post('data', []);
 				$data = array_merge($data, ['user_id' => $this->account->_id]);
-				$asset = new \Models\vender($data);
+				$asset = new \Models\vendor($data);
 				$asset->save();
-				\Shared\Utils::flashMsg(['type' => 'success', 'text' => 'Vender Added successfully']);
-				$this->redirect('/vender/manage');
+				\Shared\Utils::flashMsg(['type' => 'success', 'text' => 'vendor Added successfully']);
+				$this->redirect('/vendor/manage');
 			}
 		} catch (\Exception $e) {
 			\Shared\Utils::flashMsg(['type' => 'error', 'text' => $e->getMessage()]);
@@ -71,11 +71,11 @@ class Vender extends Shared\Controller {
 				break;
 		}
 
-        $venders = \Models\vender::selectAll($query, [], ['maxTimeMS' => 5000, 'direction' => 'desc', 'order' => ['created' => -1]]);
-		$count = \Models\vender::count($query);
+        $vendors = \Models\vendor::selectAll($query, [], ['maxTimeMS' => 5000, 'direction' => 'desc', 'order' => ['created' => -1]]);
+		$count = \Models\vendor::count($query);
 
 		$view->set([
-			'venders' => $venders ?? [],
+			'vendors' => $vendors ?? [],
 			'search' => $this->request->get('search', ''),
 			'type' => $this->request->get('type', '')
 		]);
@@ -91,14 +91,14 @@ class Vender extends Shared\Controller {
 			$this->redirect('/vendor/manage');
 		}
 
-		$vender = \Models\vender::findById($id);
-		if (!$vender) {
-			return $view->set('message', ['type' => 'error', 'text' => 'No Vender found!']);
+		$vendor = \Models\vendor::findById($id);
+		if (!$vendor) {
+			return $view->set('message', ['type' => 'error', 'text' => 'No vendor found!']);
 		}
 		$msg = "";
 		try {
-			$vender->delete();
-			$msg = 'Vender deleted successfully!';
+			$vendor->delete();
+			$msg = 'vendor deleted successfully!';
 		} catch (\Exception $e) {
 			$msg = ['type' => 'error', 'text' => 'Something went wrong. Please Try Again'];
 		}
@@ -113,25 +113,25 @@ class Vender extends Shared\Controller {
 		if (!$id) {
 			$this->_404();
 		}
-		$vender = \Models\vender::findById($id);
-		if (!$vender) {
-			return $view->set('message', ['type' => 'error', 'text' => 'No Vender found!']);
+		$vendor = \Models\vendor::findById($id);
+		if (!$vendor) {
+			return $view->set('message', ['type' => 'error', 'text' => 'No vendor found!']);
 		}
 		try {
 			if ($this->request->isPost()) {
 				$data = $this->request->post('data', []);
 				foreach(['name', 'email', 'address', 'state', 'country', 'company_name', 'phone'] as $value) {
 					if (isset($data[$value])) {
-						$vender->$value = $data[$value];
+						$vendor->$value = $data[$value];
 					}
 				}
-				$vender->save();
-				$view->set('message', ['type' => 'success', 'text' => 'Vender Edited successfully']);
+				$vendor->save();
+				$view->set('message', ['type' => 'success', 'text' => 'vendor Edited successfully']);
 				
 			}
 		} catch (\Exception $e) {
 			$view->set('message', ['type' => 'error', 'text' => $e->getMessage()]);
 		}
-		$view->set('vender', $vender);
+		$view->set('vendor', $vendor);
 	}
 }

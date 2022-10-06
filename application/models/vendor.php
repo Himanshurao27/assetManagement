@@ -4,13 +4,13 @@ namespace Models;
 use Shared\Services\Db;
 use Framework\{Security};
 
-class Vender extends \Shared\Model {
+class vendor extends \Shared\Model {
 
 	/**
 	 * @readwrite
 	 * @var string
 	 */
-	protected $_table = "vender";
+	protected $_table = "vendor";
 
 	/**
 	 * @column
