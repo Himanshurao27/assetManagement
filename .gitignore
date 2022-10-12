@@ -1,5 +1,6 @@
 # Config Files/Folders
 sftp-config.json
+breadcrumbs.json
 .idea
 .vscode
 
