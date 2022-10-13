@@ -1,0 +1,21 @@
+# Payment Info files
+application/configuration/app.ini
+application/configuration/cache.ini
+application/configuration/database.ini
+application/configuration/session.ini
+
+# Config Files/Folders
+breadcrumbs.json
+.idea
+.vscode
+
+# OS Files
+.DS_Store
+
+
+# framework Files
+framework
+
+# Min files
+public/assets/js/*.min.js
+public/assets/css/*.min.css
