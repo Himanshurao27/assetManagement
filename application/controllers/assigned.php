@@ -7,6 +7,9 @@ class Assigned extends Shared\Controller {
 
 	/**
 	 * @before _secure
+	 * [PUBLIC] This function will add assigned
+	 * - Return message
+	 * @author Himanshu Rao <himanshurao@trackier.com>
 	 */
 	public function add(){
         $view = $this->getActionView();
@@ -20,8 +23,8 @@ class Assigned extends Shared\Controller {
 					unset($data['handover_date']);
 				}
 				$data = array_merge($data, ['user_id' => $this->account->_id]);
-				$asset = new \Models\Assigned($data);
-				$asset->save();
+				$assigned = new \Models\Assigned($data);
+				$assigned->save();
 				\Shared\Utils::flashMsg(['type' => 'success', 'text' => 'Assigned Added successfully']);
 				$this->redirect('/assigned/manage');
 				
@@ -37,6 +40,8 @@ class Assigned extends Shared\Controller {
 
 	/**
 	 * @before _secure
+	 * [PUBLIC] This function will find assigned base on query
+	 * @author Himanshu Rao <himanshurao@trackier.com>
 	 */
 	public function manage() {
 		$view = $this->getActionView();
@@ -72,6 +77,8 @@ class Assigned extends Shared\Controller {
 
     /**
 	 * @before _secure
+	 * [PUBLIC] This function will find and delete assigned by id
+	 * @author Himanshu Rao <himanshurao@trackier.com>
 	 */
 	public function delete($id = null) {
 		$view = $this->getActionView();
@@ -96,6 +103,8 @@ class Assigned extends Shared\Controller {
 
     /**
 	 * @before _secure
+	 * [PUBLIC] This function will find and edit assigned
+	 * @author Himanshu Rao <himanshurao@trackier.com>
 	 */
 	public function edit($id = null) {
 		$view = $this->getActionView();

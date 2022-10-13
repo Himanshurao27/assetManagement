@@ -13,7 +13,10 @@ class Auth extends Shared\Controller {
 	/**
 	 * @before _session
 	 * @after _csrfToken
-	 */
+	 * [PUBLIC] This function will login in the panel after 
+	 * verifying email, password and csrf token
+	 * @author Himanshu Rao <himanshurao@trackier.com>
+	*/
 	public function login() {
 		$token = $this->request->post("token", '');
 		$session = Registry::get("session");
@@ -63,7 +66,6 @@ class Auth extends Shared\Controller {
 			$this->actionView->set('__token', $csrf_token);
 		}
 	}
-
 	public function verifyToken($token = null) {
 		$session = $this->getSession();
 		$csrf = $session->get('Auth\Request:$token');
@@ -74,6 +76,10 @@ class Auth extends Shared\Controller {
 		return false;
 	}
 
+	/**
+	* [PUBLIC] This function will logout of the panel
+	* @author Himanshu Rao <himanshurao@trackier.com>
+	*/
 	public function logout() {
 		$this->setAccount(false);
 		$this->redirect('/auth/login');
@@ -82,6 +88,8 @@ class Auth extends Shared\Controller {
 	/**
 	 * @before _session
 	 * @after _csrfToken
+	 * [PUBLIC] This function will add new account
+	 * @author Himanshu Rao <himanshurao@trackier.com>
 	 */
 	public function register() {
 		$token = $this->request->post("token", '');

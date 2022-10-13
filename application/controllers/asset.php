@@ -11,6 +11,9 @@ class Asset extends Shared\Controller {
 
 	/**
 	 * @before _secure
+	 * [PUBLIC] This function will add asset
+	 * - Return message
+	 * @author Himanshu Rao <himanshurao@trackier.com>
 	 */
 	public function add(){
 		$view = $this->getActionView();
@@ -38,6 +41,8 @@ class Asset extends Shared\Controller {
 
 	/**
 	 * @before _secure
+	 * [PUBLIC] This function will find asset base on query
+	 * @author Himanshu Rao <himanshurao@trackier.com>
 	 */
 	public function manage() {
 		$view = $this->getActionView();
@@ -68,6 +73,8 @@ class Asset extends Shared\Controller {
 
 	/**
 	 * @before _secure
+	 * [PUBLIC] This function will find and delete asset by id
+	 * @author Himanshu Rao <himanshurao@trackier.com>
 	 */
 	public function delete($id = null) {
 		$view = $this->getActionView();
@@ -90,8 +97,10 @@ class Asset extends Shared\Controller {
 		$view->set('message', $msg);
 	}
 
-	    /**
+	/**
 	 * @before _secure
+	 * [PUBLIC] This function will find and edit id
+	 * @author Himanshu Rao <himanshurao@trackier.com>
 	 */
 	public function edit($id = null) {
 		$view = $this->getActionView();

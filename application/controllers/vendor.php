@@ -12,14 +12,17 @@ class vendor extends Shared\Controller {
 
 	/**
 	 * @before _secure
+	 * [PUBLIC] This function will add vendor
+	 * - Return message
+	 * @author Himanshu Rao <himanshurao@trackier.com>
 	 */
 	public function add(){
 		try {
 			if ($this->request->isPost()) {
 				$data = $this->request->post('data', []);
 				$data = array_merge($data, ['user_id' => $this->account->_id]);
-				$asset = new \Models\vendor($data);
-				$asset->save();
+				$vendor = new \Models\vendor($data);
+				$vendor->save();
 				\Shared\Utils::flashMsg(['type' => 'success', 'text' => 'vendor Added successfully']);
 				$this->redirect('/vendor/manage');
 			}
@@ -30,6 +33,8 @@ class vendor extends Shared\Controller {
 
 	/**
 	 * @before _secure
+	 * [PUBLIC] This function will find vendor base on query
+	 * @author Himanshu Rao <himanshurao@trackier.com>
 	 */
 	public function manage() {
 		$view = $this->getActionView();
@@ -83,6 +88,8 @@ class vendor extends Shared\Controller {
 
 	/**
 	 * @before _secure
+	 * [PUBLIC] This function will find and delete vendor by id
+	 * @author Himanshu Rao <himanshurao@trackier.com>
 	 */
 	public function delete($id = null) {
 		$view = $this->getActionView();
@@ -105,8 +112,10 @@ class vendor extends Shared\Controller {
 		$view->set('message', $msg);
 	}
 
-    	/**
+    /**
 	 * @before _secure
+	 * [PUBLIC] This function will find and edit vendor
+	 * @author Himanshu Rao <himanshurao@trackier.com>
 	 */
 	public function edit($id = null) {
 		$view = $this->getActionView();

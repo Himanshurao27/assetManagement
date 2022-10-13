@@ -8,14 +8,17 @@ class Employee extends Shared\Controller {
 
 	/**
 	 * @before _secure
+	 * [PUBLIC] This function will add employee
+	 * - Return message
+	 * @author Himanshu Rao <himanshurao@trackier.com>
 	 */
 	public function add(){
 		try {
 			if ($this->request->isPost()) {
 				$data = $this->request->post('data', []);
 				$data = array_merge($data, ['user_id' => $this->account->_id]);
-				$asset = new \Models\employee($data);
-				$asset->save();
+				$employee = new \Models\employee($data);
+				$employee->save();
 				\Shared\Utils::flashMsg(['type' => 'success', 'text' => 'Employee Added successfully']);
 				$this->redirect('/employee/manage');
 				
@@ -27,6 +30,8 @@ class Employee extends Shared\Controller {
 
 	/**
 	 * @before _secure
+	 * [PUBLIC] This function will find employee base on query
+	 * @author Himanshu Rao <himanshurao@trackier.com>
 	 */
 	public function manage() {
 		$view = $this->getActionView();
@@ -64,6 +69,8 @@ class Employee extends Shared\Controller {
 
 	/**
 	 * @before _secure
+	 * [PUBLIC] This function will find and delete employee by id
+	 * @author Himanshu Rao <himanshurao@trackier.com>
 	 */
 	public function delete($id = null) {
 		$view = $this->getActionView();
@@ -88,6 +95,8 @@ class Employee extends Shared\Controller {
 
 	/**
 	 * @before _secure
+	 * [PUBLIC] This function will find and edit employee
+	 * @author Himanshu Rao <himanshurao@trackier.com>
 	 */
 	public function edit($id = null) {
 		$view = $this->getActionView();
